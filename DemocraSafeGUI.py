@@ -64,28 +64,28 @@ def Round2(select):
 def ButtonHandler1(select):  # Called when user clicks button
     if select == "Next Question":  # If user clicks 'Submit'
         if program.getRadioButton("option") == "Hung":  # If user had chosen 'Hung'
-            program.infoBox("Message", "You have succesfully voted for Hung for first place! Thank you for your vote.")  # Displays message box
+            # program.infoBox("Message", "You have succesfully voted for Hung for first place! Thank you for your vote.")  # Displays message box
             program.showSubWindow(select)
             program.hideSubWindow("I understood", useStopFunction=False)
             program.confirmHideSubWindow("I understood")
             #program.setRadioButton("option","Josh",callFunction=False)
             #quit()
         elif program.getRadioButton("option") == "Josh": # If user had chosen 'Josh'
-            program.infoBox("Message", "You have succesfully voted for Josh for first place! Thank you for your vote.")
+            # program.infoBox("Message", "You have succesfully voted for Josh for first place! Thank you for your vote.")
             program.showSubWindow(select)
             program.hideSubWindow("I understood", useStopFunction=False)
             program.confirmHideSubWindow("I understood")
             #program.setRadioButton("option","Josh",callFunction=False)
             #quit()
         elif program.getRadioButton("option") == "Samuel":# If user had chosen 'Sam'
-            program.infoBox("Message", "You have succesfully voted for Samuel for first place! Thank you for your vote.")
+            # program.infoBox("Message", "You have succesfully voted for Samuel for first place! Thank you for your vote.")
             program.showSubWindow(select)
             program.hideSubWindow("I understood", useStopFunction=False)
             program.confirmHideSubWindow("I understood")
             #program.setRadioButton("option","Josh",callFunction=False)
             #quit()
         elif program.getRadioButton("option") == "Rishabh":  # If user had chosen 'Rishabh'
-            program.infoBox("Message", "You have succesfully voted for Rishabh for first place! Thank you for your vote.")  # Displays message box
+            # program.infoBox("Message", "You have succesfully voted for Rishabh for first place! Thank you for your vote.")  # Displays message box
             program.showSubWindow(select)
             program.hideSubWindow("I understood", useStopFunction=False)
             #program.setRadioButton("option","Josh",callFunction=False)
@@ -96,25 +96,25 @@ def ButtonHandler1(select):  # Called when user clicks button
     elif select == "Last Question":  # If user clicks 'Submit'
         if program.getRadioButton("option5") == "Hung":  # If user had chosen 'Hung'
             #program.setRadioButton("option5","Hung",callFunction=True)
-            program.infoBox("Message", "You have succesfully voted for Hung for second place! Thank you for your vote.")  # Displays message box
+            # program.infoBox("Message", "You have succesfully voted for Hung for second place! Thank you for your vote.")  # Displays message box
             program.showSubWindow(select)
             program.hideSubWindow("Next Question", useStopFunction=False)
             program.confirmHideSubWindow("Next Question")
             #quit()
         elif program.getRadioButton("option5") == "Josh": # If user had chosen 'Josh'
-            program.infoBox("Message", "You have succesfully voted for Josh for second place! Thank you for your vote.")
+            # program.infoBox("Message", "You have succesfully voted for Josh for second place! Thank you for your vote.")
             program.showSubWindow(select)
             program.hideSubWindow("Next Question", useStopFunction=False)
             program.confirmHideSubWindow("Next Question")
             #quit()
         elif program.getRadioButton("option5") == "Samuel":# If user had chosen 'Sam'
-            program.infoBox("Message", "You have succesfully voted for Samuel for second place! Thank you for your vote.")
+            # program.infoBox("Message", "You have succesfully voted for Samuel for second place! Thank you for your vote.")
             program.showSubWindow(select)
             program.hideSubWindow("Next Question", useStopFunction=False)
             program.confirmHideSubWindow("Next Question")
             #quit()
         elif program.getRadioButton("option5") == "Rishabh": # If user had chosen 'Rishabh'
-            program.infoBox("Message", "You have succesfully voted for Rishabh for second place! Thank you for your vote.")  # Displays message box
+            # program.infoBox("Message", "You have succesfully voted for Rishabh for second place! Thank you for your vote.")  # Displays message box
             program.showSubWindow(select)
             program.hideSubWindow("Next Question", useStopFunction=False)
             program.confirmHideSubWindow("Next Question")
@@ -124,25 +124,25 @@ def ButtonHandler1(select):  # Called when user clicks button
     
     if select == "Done":  # If user clicks 'Submit'
         if program.getRadioButton("option6") == "Hung":  # If user had chosen 'Hung'
-            program.infoBox("Message", "You have succesfully voted for Hung for third place! Thank you for your vote.")  # Displays message box
+            # program.infoBox("Message", "You have succesfully voted for Hung for third place! Thank you for your vote.")  # Displays message box
             program.showSubWindow(select)
             program.hideSubWindow("Last Question", useStopFunction=False)
             program.confirmHideSubWindow("Last Question")
             #quit()
         elif program.getRadioButton("option6") == "Josh": # If user had chosen 'Josh'
-            program.infoBox("Message", "You have succesfully voted for Josh for third place! Thank you for your vote.")
+            # program.infoBox("Message", "You have succesfully voted for Josh for third place! Thank you for your vote.")
             program.showSubWindow(select)
             program.hideSubWindow("Last Question", useStopFunction=False)
             program.confirmHideSubWindow("Last Question")
             #quit()
         elif program.getRadioButton("option6") == "Samuel":# If user had chosen 'Sam'
-            program.infoBox("Message", "You have succesfully voted for Samuel for third place! Thank you for your vote.")
+            # program.infoBox("Message", "You have succesfully voted for Samuel for third place! Thank you for your vote.")
             program.showSubWindow(select)
             program.hideSubWindow("Last Question", useStopFunction=False)
             program.confirmHideSubWindow("Last Question")
             #quit()
         elif program.getRadioButton("option6") == "Rishabh":  # If user had chosen 'Rishabh'
-            program.infoBox("Message", "You have succesfully voted for Rishabh for third place! Thank you for your vote.")  # Displays message box
+            # program.infoBox("Message", "You have succesfully voted for Rishabh for third place! Thank you for your vote.")  # Displays message box
             program.showSubWindow(select)
             program.hideSubWindow("Last Question", useStopFunction=False)
             program.confirmHideSubWindow("Last Question")
@@ -184,14 +184,13 @@ program.setBg("light blue")  # Sets background colour
 
 program.addLabel("option1", "Voting Instructions")  # Title
 program.getLabelWidget("option1").config(font="Times 30 roman underline")
-program.addLabel("optio","1. Read the questions on the next few slides carefully before deciding")
-program.addLabel("option2", "2. Make your choices by selecting the button next to your decision")
-program.addLabel("option3", "3. After you have made your decision, proceed and it will take you to the next question")
-program.addLabel("op", "4. If you want a summary of the projects, click More Info, and click Close if you want to Exit")
-program.addLabel("opti","5. Review your choices in the Summary page and click Submit")
-program.addLabel("option4", "6. We would appreciate your feedback by filling out the survey at the end")
-program.addLabel("opt","7. Please hold on to the printed receipt and insert it into the scanner for your vote to be cast")
-program.getLabelWidget("opt").config(font="Times 14 roman bold")
+program.addLabel("optio","1. Read the questions carefully before casting your vote")
+program.addLabel("option2", "2. After you make your choice, proceed and it will take your to the next question")
+program.addLabel("option3", "3. More Info for the summary of the projects, Close if you want to Exit")
+program.addLabel("opti","4. Review your choices in the Summary page and click Submit")
+# program.addLabel("option4", "6. We would appreciate your feedback by filling out the survey at the end")
+program.addLabel("opt","5. Take the ballot to the scanner to cast your vote")
+program.getLabelWidget("opt").config(font="Times 18 roman bold")
 program.addButtons(["I understood", "Out"], Instructions)
 program.stopSubWindow()
 
@@ -215,11 +214,12 @@ program.addLabel("question", "What is your choice for First Place?")  # Label
 
 # Radiobuttons
 program.setFont(15)
-program.addRadioButton("option","Don't select this box")
+program.addRadioButton("option","No Vote")
 program.addRadioButton("option","Hung")
 program.addRadioButton("option","Josh")
 program.addRadioButton("option","Samuel")
 program.addRadioButton("option","Rishabh")
+
 # Buttons
 program.addButtons(["Next Question", "More Info", "Close"], ButtonHandler1)
 program.stopSubWindow()
@@ -237,7 +237,7 @@ program.addLabel("question2", "What is your choice for Second Place?")  # Label
 
 # Radiobuttons
 program.setFont(15)
-program.addRadioButton("option5","Don't select this box")
+program.addRadioButton("option5","No Vote")
 program.addRadioButton("option5","Hung")
 program.addRadioButton("option5","Josh")
 program.addRadioButton("option5","Samuel")
@@ -260,7 +260,7 @@ program.addLabel("question3", "What is your choice for Third Place?")  # Label
 
 # Radiobuttons
 program.setFont(15)
-program.addRadioButton("option6","Don't select this box")
+program.addRadioButton("option6","No Vote")
 program.addRadioButton("option6","Hung")
 program.addRadioButton("option6","Josh")
 program.addRadioButton("option6","Samuel")
