@@ -23,6 +23,7 @@ def Start(select):
         program.showSubWindow(select)
     elif select == "Exit":             # Last button of the GUI (to reboot the GUI)
         Clean()
+        ResetSummary()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
@@ -35,16 +36,18 @@ def Instructions(select):
         program.confirmHideSubWindow("Start Voting")
     elif select == "Out":
         Clean()
+        
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
+def ResetSummary():
+    program.destroySubWindow("Done")                 # Destroy Done because this page need to be updated everytime
 
 def Clean():
 # Reboot the GUI
     program.clearAllRadioButtons(callFunction=False) # Clear all radio buttons
     program.clearAllEntries(callFunction=False)      # Clear all entries
     program.hideAllSubWindows()                      # Hide all subwindows
-    program.destroySubWindow("Done")                 # Destroy Done because this page need to be updated everytime
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,18 +58,19 @@ def Final(select):
         program.showSubWindow(select)
     elif select == "Change Question 1":      # Take the voter back to question 1 to allow them to change it
         program.showSubWindow("I understood")
-        program.destroySubWindow("Done")
+        ResetSummary()
         # Destroyed as it needs to update
     elif select == "Change Question 2":      # Take the voter back to question 2 to allow them to change it
         program.showSubWindow("Next")
-        program.destroySubWindow("Done")
+        ResetSummary()
         # Destroyed as it needs to update
     elif select == "Change Question 3":      # Take the voter back to question 3 to allow them to change it
         program.showSubWindow(" Next ")
-        program.destroySubWindow("Done")
+        ResetSummary()
         # Destroyed as it needs to update
     elif select == "Discard Vote":           # If the ballot is discard, the GUI will reboot
         Clean()
+        ResetSummary()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,29 +81,29 @@ def Special():
     program.addLabel("last", "Summary")                                   # This is for the Summary
     program.getLabelWidget("last").config(font="Times 30 roman underline")# Make Summary the top and biggest in the page
 #-----------------------------------------------------------------------------------
-    if (program.getRadioButton("option") == "Write-In"):
-    # If the choice was a Write-In option, it will prints out whatever the voter typed in
+    if (program.getRadioButton("option") == "Others"):
+    # If the choice was a Others option, it will prints out whatever the voter typed in
         program.addLabel("comment3", "Your choice for the first place project is : " + program.getEntry("1st Place: "))
         program.getLabelWidget("comment3").config(font="Times 15 roman bold")
-    elif (program.getRadioButton("option") != "Write-In"):
+    elif (program.getRadioButton("option") != "Others"):
     # If the choice was one of the button, it will prints out that button
         program.addLabel("comment3", "Your choice for the first place project is : " + program.getRadioButton("option"))
         program.getLabelWidget("comment3").config(font="Times 15 roman bold")
 #-----------------------------------------------------------------------------------    
-    if (program.getRadioButton("option5") == "Write-In"):
-    # If the choice was a Write-In option, it will prints out whatever the voter typed in
+    if (program.getRadioButton("option5") == "Others"):
+    # If the choice was a Others option, it will prints out whatever the voter typed in
         program.addLabel("comment4", "Your choice for the second place project is : " + program.getEntry("2nd Place: "))
         program.getLabelWidget("comment4").config(font="Times 15 roman bold")
-    elif (program.getRadioButton("option5") != "Write-In"):
+    elif (program.getRadioButton("option5") != "Others"):
     # If the choice was one of the button, it will prints out that button
         program.addLabel("comment4", "Your choice for the second place project is : " + program.getRadioButton("option5"))
         program.getLabelWidget("comment4").config(font="Times 15 roman bold")
 #-----------------------------------------------------------------------------------    
-    if (program.getRadioButton("option6") == "Write-In"):
-    # If the choice was a Write-In option, it will prints out whatever the voter typed in
+    if (program.getRadioButton("option6") == "Others"):
+    # If the choice was a Others option, it will prints out whatever the voter typed in
         program.addLabel("comment5", "Your choice for the third place project is : " + program.getEntry("3rd Place: "))
         program.getLabelWidget("comment5").config(font="Times 15 roman bold")
-    elif (program.getRadioButton("option6") != "Write-In"):      
+    elif (program.getRadioButton("option6") != "Others"):      
     # If the choice was one of the button, it will prints out that button  
         program.addLabel("comment5", "Your choice for the third place project is : " + program.getRadioButton("option6"))
         program.getLabelWidget("comment5").config(font="Times 15 roman bold")
@@ -168,6 +172,20 @@ def MoreInfo3():
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
+def Pop1(rb):
+    if program.getRadioButton("option") == "Others":
+        if program.getEntry("1st Place: ") == "":
+            program.showSubWindow("Change Write In")
+
+def Pop2(rb):
+    if program.getRadioButton("option5") == "Others":
+        if program.getEntry("2nd Place: ") == "":
+            program.showSubWindow("Change Write In ")
+
+def Pop3(rb):
+    if program.getRadioButton("option6") == "Others":
+        if program.getEntry("3rd Place: ") == "":
+            program.showSubWindow(" Change Write In ")
 
 def ButtonHandler1(select):  
 # Called if buttons are associated with ButtonHandler1
@@ -178,7 +196,7 @@ def ButtonHandler1(select):
             program.hideSubWindow("I understood", useStopFunction=False)
             program.confirmHideSubWindow("I understood")
 
-        elif program.getRadioButton("option") == "Write-In":
+        elif program.getRadioButton("option") == "Others":
             if program.getEntry("1st Place: ") != "":
                 program.showSubWindow(select)
                 program.hideSubWindow("I understood", useStopFunction=False)
@@ -197,7 +215,7 @@ def ButtonHandler1(select):
             program.hideSubWindow("Next", useStopFunction=False)
             program.confirmHideSubWindow("Next")
 
-        elif program.getRadioButton("option5") == "Write-In":
+        elif program.getRadioButton("option5") == "Others":
             if program.getEntry("2nd Place: ") != "":
                 program.showSubWindow(select)
                 program.hideSubWindow("Next", useStopFunction=False)
@@ -217,7 +235,7 @@ def ButtonHandler1(select):
             Special()
             program.hideSubWindow(" Next ", useStopFunction=False)
             program.confirmHideSubWindow(" Next ")
-        elif program.getRadioButton("option6") == "Write-In":
+        elif program.getRadioButton("option6") == "Others":
             if program.getEntry("3rd Place: ") != "":
                 program.startSubWindow("Done", modal = True)
                 Special()
@@ -293,14 +311,25 @@ def ButtonHandler1(select):
     # If user clicks 'Close', this is for the 'More Info' in the third question
         program.showSubWindow(" Next ")
         program.destroySubWindow("More Info")
-
+#-----------------------------------------------------------------------------------
+    elif select == "Change Write In":
+        program.setRadioButton("option","Others")
+        program.showSubWindow("Change Write In")
+    
+    elif select == "Change Write In ":
+        program.setRadioButton("option5","Others")
+        program.showSubWindow("Change Write In ")
+    
+    elif select == " Change Write In ":
+        program.setRadioButton("option6","Others")
+        program.showSubWindow(" Change Write In ")
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
 
 def Others(select):
-# This is for the Write-In option
+# This is for the Others option
 
-    # Write-In option for the first question
+    # Others option for the first question
     if select == "Save":
         program.hideSubWindow("Change Write In")
         program.showSubWindow("I understood")
@@ -308,7 +337,7 @@ def Others(select):
         program.hideSubWindow("Change Write In")
         program.showSubWindow("I understood")
 #-----------------------------------------------------------------------------------
-    # Write-In option for the second question
+    # Others option for the second question
     elif select == "Save ":
         program.hideSubWindow("Change Write In ")
         program.showSubWindow("Next")
@@ -316,7 +345,7 @@ def Others(select):
         program.hideSubWindow("Change Write In ")
         program.showSubWindow("Next")
 #-----------------------------------------------------------------------------------
-    # Write-In option for the third question
+    # Others option for the third question
     elif select ==" Save ":
         program.hideSubWindow(" Change Write In ")
         program.showSubWindow(" Next ")
@@ -368,7 +397,9 @@ def main():
     program.addRadioButton("option","Project 2")
     program.addRadioButton("option","Project 3")
     program.addRadioButton("option","Project 4")
-    program.addRadioButton("option","Write-In")
+    program.addRadioButton("option","Others")       
+
+    program.setRadioButtonChangeFunction("option", Pop1)
 #-----------------------------------------------------------------------------------
     program.startSubWindow("Change Write In", modal = True)
     program.setSize(600, 600)
@@ -377,6 +408,7 @@ def main():
     program.addButtons(["Save", "Cancel"], Others)
     program.stopSubWindow()
 
+    program.addButton("Change Write In", ButtonHandler1)
     program.addButtons(["Previous","Next", "More Info", "Close"], ButtonHandler1)
     program.stopSubWindow()
 #-----------------------------------------------------------------------------------
@@ -398,7 +430,9 @@ def main():
     program.addRadioButton("option5","Project 2")
     program.addRadioButton("option5","Project 3")
     program.addRadioButton("option5","Project 4")
-    program.addRadioButton("option5","Write-In")
+    program.addRadioButton("option5","Others")
+
+    program.setRadioButtonChangeFunction("option5", Pop2)
 #-----------------------------------------------------------------------------------
     program.startSubWindow("Change Write In ", modal = True)
     program.setSize(600, 600)
@@ -407,6 +441,7 @@ def main():
     program.addButtons(["Save ", "Cancel "], Others)
     program.stopSubWindow()
 
+    program.addButtons(["Change Write In "], ButtonHandler1)
     program.addButtons(["Previous ", " Next ", "More Info ", "Close "], ButtonHandler1)
     program.stopSubWindow()
 #-----------------------------------------------------------------------------------
@@ -428,7 +463,9 @@ def main():
     program.addRadioButton("option6","Project 2")
     program.addRadioButton("option6","Project 3")
     program.addRadioButton("option6","Project 4")
-    program.addRadioButton("option6","Write-In")
+    program.addRadioButton("option6","Others")
+
+    program.setRadioButtonChangeFunction("option6", Pop3)
 #-----------------------------------------------------------------------------------
     program.startSubWindow(" Change Write In ", modal = True)
     program.setSize(600, 600)
@@ -437,6 +474,7 @@ def main():
     program.addButtons([" Save ", " Cancel "], Others)
     program.stopSubWindow()
 
+    program.addButtons([" Change Write In "], ButtonHandler1)
     program.addButtons([" Previous ", "Done", " More Info ", " Close "], ButtonHandler1)
     program.stopSubWindow()
 #-----------------------------------------------------------------------------------
@@ -462,3 +500,4 @@ def main():
 #---------------------------------------------------------------------------------------------------------------------------------------------
 
 main()
+
