@@ -56,6 +56,19 @@ def Final(select):
 # Take voter to the very last page with the survey and exit
     if select == "Submit":                   # Take the voter to the last page and allow the GUI to reboot   
         program.showSubWindow(select)
+        print("DemocraSafeGUI")
+        if (program.getRadioButton("option") == "Others"):        
+            print("First place: " + program.getEntry("1st Place: "))
+        elif (program.getRadioButton("option") != "Others"):
+            print("First place: " + program.getRadioButton("option"))
+        if (program.getRadioButton("option5") == "Others"):    
+            print("Second place: " + program.getEntry("2nd Place: "))
+        elif (program.getRadioButton("option5") != "Others"):
+            print("Second place: " + program.getRadioButton("option5"))
+        if (program.getRadioButton("option6") == "Others"):
+            print("Third place: " + program.getEntry("3rd Place: "))
+        elif (program.getRadioButton("option6") != "Others"):
+            print("Third place: " + program.getRadioButton("option6"))
     elif select == "Change Question 1":      # Take the voter back to question 1 to allow them to change it
         program.showSubWindow("I understood")
         ResetSummary()
@@ -85,28 +98,35 @@ def Special():
     # If the choice was a Others option, it will prints out whatever the voter typed in
         program.addLabel("comment3", "Your choice for the first place project is : " + program.getEntry("1st Place: "))
         program.getLabelWidget("comment3").config(font="Times 15 roman bold")
+        #print("First place: " + program.getEntry("1st Place: "))
     elif (program.getRadioButton("option") != "Others"):
     # If the choice was one of the button, it will prints out that button
         program.addLabel("comment3", "Your choice for the first place project is : " + program.getRadioButton("option"))
         program.getLabelWidget("comment3").config(font="Times 15 roman bold")
+        #print("First place: " + program.getRadioButton("option"))
 #-----------------------------------------------------------------------------------    
     if (program.getRadioButton("option5") == "Others"):
     # If the choice was a Others option, it will prints out whatever the voter typed in
         program.addLabel("comment4", "Your choice for the second place project is : " + program.getEntry("2nd Place: "))
         program.getLabelWidget("comment4").config(font="Times 15 roman bold")
+        #print("Second place: " + program.getEntry("2nd Place: "))
     elif (program.getRadioButton("option5") != "Others"):
     # If the choice was one of the button, it will prints out that button
         program.addLabel("comment4", "Your choice for the second place project is : " + program.getRadioButton("option5"))
         program.getLabelWidget("comment4").config(font="Times 15 roman bold")
+        #print("Second place: " + program.getRadioButton("option5"))
 #-----------------------------------------------------------------------------------    
     if (program.getRadioButton("option6") == "Others"):
     # If the choice was a Others option, it will prints out whatever the voter typed in
         program.addLabel("comment5", "Your choice for the third place project is : " + program.getEntry("3rd Place: "))
         program.getLabelWidget("comment5").config(font="Times 15 roman bold")
+        #print("Third place: " + program.getEntry("3rd Place: "))
     elif (program.getRadioButton("option6") != "Others"):      
     # If the choice was one of the button, it will prints out that button  
         program.addLabel("comment5", "Your choice for the third place project is : " + program.getRadioButton("option6"))
         program.getLabelWidget("comment5").config(font="Times 15 roman bold")
+        #print("Third place: " + program.getRadioButton("option6"))
+
 
     program.addButtons(["Change Question 1", "Change Question 2", "Change Question 3"], Final)
     program.addButtons(["Submit", "Discard Vote"], Final)
