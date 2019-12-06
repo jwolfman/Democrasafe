@@ -2,17 +2,17 @@
 
 from appJar import gui, appjar    # Imports all components of appJar
 
-# Create an app instance to get the screen dimensions
-root = appjar.Tk()
+# # Create an app instance to get the screen dimensions
+# root = appjar.Tk()
 
-# Save the screen dimensions
-width = root.winfo_screenwidth()
-height = root.winfo_screenheight()
+# # Save the screen dimensions
+# width = root.winfo_screenwidth() - 10
+# height = root.winfo_screenheight() - 10
 
-# Destroy the app instance after retrieving the screen dimensions
-root.destroy()
+# # Destroy the app instance after retrieving the screen dimensions
+# root.destroy()
 
-program = gui("Welcome!", str(width) + "x" + str(height))  # Sets size and title of main GUI
+program = gui("Welcome!", 'fullscreen')  # Sets size and title of main GUI
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,26 +49,44 @@ def Clean():
     program.clearAllEntries(callFunction=False)      # Clear all entries
     program.hideAllSubWindows()                      # Hide all subwindows
 
+def setFullscreen(self, container=None):
+        if True: #not 
+            self.isFullscreen
 #---------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------
 
 def Final(select):
 # Take voter to the very last page with the survey and exit
-    if select == "Submit":                   # Take the voter to the last page and allow the GUI to reboot   
+    if select == "Submit":                   
+    # Take the voter to the last page and allow the GUI to reboot   
         program.showSubWindow(select)
-        print("DemocraSafeGUI")
-        if (program.getRadioButton("option") == "Others"):        
-            print("First place: " + program.getEntry("1st Place: "))
+        print("DemocraSafe")
+        # Formatting
+        if (program.getRadioButton("option") == "Others"):  
+            print("1st place: " + program.getEntry("1st Place: "))      
+            # print("1st place: " + program.getEntry("1st Place: "), open("/dev/serial0", "w"))  
+            # open("/dev/serial0", "w") to print to printer
         elif (program.getRadioButton("option") != "Others"):
-            print("First place: " + program.getRadioButton("option"))
-        if (program.getRadioButton("option5") == "Others"):    
-            print("Second place: " + program.getEntry("2nd Place: "))
+            print("1st place: " + program.getRadioButton("option"))
+            # print("1st place: " + program.getRadioButton("option"), open("/dev/serial0", "w"))
+            # open("/dev/serial0", "w") to print to printer
+        if (program.getRadioButton("option5") == "Others"):
+            print("2nd place: " + program.getEntry("2nd Place: "))    
+            # print("2nd place: " + program.getEntry("2nd Place: "), open("/dev/serial0", "w"))
+            # open("/dev/serial0", "w") to print to printer
         elif (program.getRadioButton("option5") != "Others"):
-            print("Second place: " + program.getRadioButton("option5"))
+            print("2nd place: " + program.getRadioButton("option5"))
+            # print("2nd place: " + program.getRadioButton("option5"), open("/dev/serial0", "w"))
+            # open("/dev/serial0", "w") to print to printer
         if (program.getRadioButton("option6") == "Others"):
-            print("Third place: " + program.getEntry("3rd Place: "))
+            print("3rd place: " + program.getEntry("3rd Place: "))
+            # print("3rd place: " + program.getEntry("3rd Place: "), open("/dev/serial0", "w"))
+            # open("/dev/serial0", "w") to print to printer
         elif (program.getRadioButton("option6") != "Others"):
-            print("Third place: " + program.getRadioButton("option6"))
+            print("3rd place: " + program.getRadioButton("option6"))
+            # print("3rd place: " + program.getRadioButton("option6"), open("/dev/serial0", "w"))
+            # open("/dev/serial0", "w") to print to printer
+
     elif select == "Change Question 1":      # Take the voter back to question 1 to allow them to change it
         program.showSubWindow("I understood")
         ResetSummary()
@@ -90,7 +108,7 @@ def Final(select):
 
 def Special():
     program.setSize(600, 600)                                             # Sets size
-    program.setBg("white")                                                # Sets background colour
+    program.setBg("mistyrose")                                                # Sets background colour
     program.addLabel("last", "Summary")                                   # This is for the Summary
     program.getLabelWidget("last").config(font="Times 30 roman underline")# Make Summary the top and biggest in the page
 #-----------------------------------------------------------------------------------
@@ -139,15 +157,17 @@ def Special():
 def MoreInfo(): 
 # For "I understood" subWindow (Question 1)
     program.setSize(600, 600)                                              # Sets size
-    program.setBg("white")                                                 # Sets background colour
+    program.setBg("mistyrose")                                                 # Sets background colour
     program.addLabel("info2", "Voting Instructions")                       # Title
     program.getLabelWidget("info2").config(font="Times 20 roman underline")# Make it the biggest and boldest
 
     program.addLabel("info3","1. Read the questions carefully before casting your vote")
-    program.addLabel("info4", "2. After you make your choice, proceed and it will take your to the Next")
+    program.addLabel("info4", "2. After you make your choice, proceed and it will you to the Next")
     program.addLabel("info5", "3. More Info for the summary of the projects, Close if you want to Exit")
     program.addLabel("info6","4. Review your choices in the Summary page and click Submit")
     program.addLabel("info7","5. Take the ballot to the scanner to cast your vote")
+    program.addLabel("info8"," Please do not leave your machine unattended ")
+    program.getLabelWidget("info8").config(font="Times 18 roman italic")
     program.getLabelWidget("info7").config(font="Times 18 roman bold")
     program.addButton("  Close  ", ButtonHandler1)
     # If Close if pressed, it will go to the function ButtonHandler1
@@ -158,15 +178,17 @@ def MoreInfo():
 def MoreInfo2():
 # For "Next" subWindow (Question 2)
     program.setSize(600, 600)                                              # Sets size
-    program.setBg("white")                                                 # Sets background colour
+    program.setBg("mistyrose")                                                 # Sets background colour
     program.addLabel("info2", "Voting Instructions")                       # Title
     program.getLabelWidget("info2").config(font="Times 20 roman underline")# Make it the biggest and boldest
 
     program.addLabel("info3","1. Read the questions carefully before casting your vote")
-    program.addLabel("info4", "2. After you make your choice, proceed and it will take your to the Next")
+    program.addLabel("info4", "2. After you make your choice, proceed and it will take you to the Next")
     program.addLabel("info5", "3. More Info for the summary of the projects, Close if you want to Exit")
     program.addLabel("info6","4. Review your choices in the Summary page and click Submit")
     program.addLabel("info7","5. Take the ballot to the scanner to cast your vote")
+    program.addLabel("info8"," Please do not leave your machine unattended ")
+    program.getLabelWidget("info8").config(font="Times 18 roman italic")
     program.getLabelWidget("info7").config(font="Times 18 roman bold")
     program.addButton("   Close  ", ButtonHandler1)
     # If Close if pressed, it will go to the function ButtonHandler1
@@ -177,15 +199,17 @@ def MoreInfo2():
 def MoreInfo3():
 # For " Next " subWindow (Question 3)
     program.setSize(600, 600)                                              # Sets size
-    program.setBg("white")                                                 # Sets background colour
+    program.setBg("mistyrose")                                                 # Sets background colour
     program.addLabel("info2", "Voting Instructions")                       # Title
     program.getLabelWidget("info2").config(font="Times 20 roman underline")# Make it the biggest and boldest
 
     program.addLabel("info3","1. Read the questions carefully before casting your vote")
-    program.addLabel("info4", "2. After you make your choice, proceed and it will take your to the Next")
+    program.addLabel("info4", "2. After you make your choice, proceed and it will take you to the Next")
     program.addLabel("info5", "3. More Info for the summary of the projects, Close if you want to Exit")
     program.addLabel("info6","4. Review your choices in the Summary page and click Submit")
     program.addLabel("info7","5. Take the ballot to the scanner to cast your vote")
+    program.addLabel("info8"," Please do not leave your machine unattended ")
+    program.getLabelWidget("info8").config(font="Times 18 roman italic")
     program.getLabelWidget("info7").config(font="Times 18 roman bold")
     program.addButton("   Close   ", ButtonHandler1)
     # If Close if pressed, it will go to the function ButtonHandler1
@@ -382,26 +406,28 @@ def main():
     program.getLabelWidget("title").config(font="Times 30 roman underline bold")
     program.addButton("Start Voting", Start)
     program.setButtonFont(size=50)
-    program.setBg("white")  # Sets background colour
+    program.setBg("mistyrose")  # Sets background colour
 #-----------------------------------------------------------------------------------
     program.startSubWindow("Start Voting", modal = True)
-    program.setSize(width, height)
-    program.setBg("white")  # Sets background colour
+    program.setFullscreen("Start Voting")
+    program.setBg("mistyrose")  # Sets background colour
 
     program.addLabel("option1", "Voting Instructions")  # Title
     program.getLabelWidget("option1").config(font="Times 30 roman underline")
     program.addLabel("optio","1. Read the questions carefully before casting your vote")
-    program.addLabel("option2", "2. After you make your choice, proceed and it will take your to the Next")
+    program.addLabel("option2", "2. After you make your choice, proceed and it will take you to the Next")
     program.addLabel("option3", "3. More Info for the summary of the projects, Close if you want to Exit")
     program.addLabel("opti","4. Review your choices in the Summary page and click Submit")
     program.addLabel("opt","5. Take the ballot to the scanner to cast your vote")
+    program.addLabel("op"," Please do not leave your machine unattended ")
+    program.getLabelWidget("op").config(font="Times 18 roman italic")
     program.getLabelWidget("opt").config(font="Times 18 roman bold")
     program.addButtons(["I understood", "Out"], Instructions)
     program.stopSubWindow()
 #-----------------------------------------------------------------------------------
     program.startSubWindow("I understood", modal = True)
-    program.setSize(width, height)
-    program.setBg("white")  # Sets background colour
+    program.setFullscreen("I understood")
+    program.setBg("mistyrose")  # Sets background colour
 
     # Labels
     program.addLabel("option", "DemocraSafe GUI")  # Title
@@ -423,7 +449,7 @@ def main():
 #-----------------------------------------------------------------------------------
     program.startSubWindow("Change Write In", modal = True)
     program.setSize(600, 600)
-    program.setBg("white")  # Sets background colour
+    program.setBg("mistyrose")  # Sets background colour
     program.addLabelEntry("1st Place: ")
     program.addButtons(["Save", "Cancel"], Others)
     program.stopSubWindow()
@@ -433,8 +459,8 @@ def main():
     program.stopSubWindow()
 #-----------------------------------------------------------------------------------
     program.startSubWindow("Next", modal = True)
-    program.setSize(width, height)
-    program.setBg("white")  # Sets background colour
+    program.setFullscreen("Next")
+    program.setBg("mistyrose")  # Sets background colour
 
     # Labels
     program.addLabel("option5", "DemocraSafe GUI")  # Title
@@ -456,7 +482,7 @@ def main():
 #-----------------------------------------------------------------------------------
     program.startSubWindow("Change Write In ", modal = True)
     program.setSize(600, 600)
-    program.setBg("white")  # Sets background colour
+    program.setBg("mistyrose")  # Sets background colour
     program.addLabelEntry("2nd Place: ")
     program.addButtons(["Save ", "Cancel "], Others)
     program.stopSubWindow()
@@ -466,8 +492,8 @@ def main():
     program.stopSubWindow()
 #-----------------------------------------------------------------------------------
     program.startSubWindow(" Next ", modal = True)
-    program.setSize(width, height)
-    program.setBg("white")  # Sets background colour
+    program.setFullscreen(" Next ")
+    program.setBg("mistyrose")  # Sets background colour
 
     # Labels
     program.addLabel("option6", "DemocraSafe GUI")  # Title
@@ -489,7 +515,7 @@ def main():
 #-----------------------------------------------------------------------------------
     program.startSubWindow(" Change Write In ", modal = True)
     program.setSize(600, 600)
-    program.setBg("white")  # Sets background colour
+    program.setBg("mistyrose")  # Sets background colour
     program.addLabelEntry("3rd Place: ")
     program.addButtons([" Save ", " Cancel "], Others)
     program.stopSubWindow()
@@ -499,9 +525,10 @@ def main():
     program.stopSubWindow()
 #-----------------------------------------------------------------------------------
     program.startSubWindow("Submit",modal = True)
-    program.setSize(width, height)
+    program.setFullscreen("Submit")
+    #program.setFullscreen("Submit")
 
-    program.setBg("white")  # Sets background colour
+    program.setBg("mistyrose")  # Sets background colour
     program.addLabel("question4", "How would you rate your voting experience?")
     program.addLabelScale("Scale")
 
