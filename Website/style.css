@@ -4,3 +4,9 @@
 h2,h3{
     text-align: center;
 }
+#slides div,#report iframe,#diagram img{
+    display: inline-block;
+}
+#slides,#report,#diagram,#sources{
+    text-align: center;
+}
