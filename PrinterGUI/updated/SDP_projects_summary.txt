@@ -1,0 +1,4 @@
+Project 1: [Project Name] This project is about Dog, Group member: Hung
+Project 2: [Project Name] This project is about Mouse, Group member: Sam
+Project 3: [Project Name] This project is about Giraffe, Group member: Josh
+Project 4: [Project Name] This project is about Bird, Group member: Rishabh
