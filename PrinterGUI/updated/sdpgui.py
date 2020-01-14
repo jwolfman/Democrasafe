@@ -59,14 +59,48 @@ class SampleApp(tk.Tk):
         os.execl(python, python, * sys.argv)
 
     def popupmsg(self):
+        self.update_idletasks()
+
         popup = tk.Tk()
         popup.wm_title("Summary of Projects")
+
+        w = self.winfo_reqwidth()
+        h = self.winfo_reqheight()
+        ws = self.winfo_screenwidth()
+        hs = self.winfo_screenheight()
+
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+
+        popup.geometry('+%d+%d' % (x, y))
 
         f = open ('SDP_projects_summary.txt', 'r')
         for x in f:
             label = tk.Label(popup, text= x, font = self.helv28b)
-            label.pack(side="top", fill="x", pady=10)
-        B1 = ttk.Button(popup, text="Done", command = popup.destroy)
+            label.pack(side="top", fill="x", pady=20)
+        B1 = ttk.Button(popup, text="Close", command = popup.destroy)
+        B1.pack()
+        popup.mainloop()
+
+    def popupmsg2(self):
+        self.update_idletasks()
+        
+        popup = tk.Tk()
+        popup.wm_title("Error!")
+
+        w = self.winfo_reqwidth()
+        h = self.winfo_reqheight()
+        ws = self.winfo_screenwidth()
+        hs = self.winfo_screenheight()
+
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+
+        popup.geometry('+%d+%d' % (x, y))
+
+        label = tk.Label(popup, text= "Please fill out your choice for 'Other'", font = self.helv28b)
+        label.pack(side="top", fill="x", pady=10)
+        B1 = ttk.Button(popup, text="Close", command = popup.destroy)
         B1.pack()
         popup.mainloop()
         
@@ -161,8 +195,7 @@ class PageTwo(tk.Frame):
         button4.place(relx = 0.5, rely = 0.75, relwidth = 0.2, relheight = 0.1)
 
     def next(self):
-        self.write_in()
-
+        self.write_in() 
         if "PageThree" in self.controller.frames:
             self.controller.show_frame("PageThree") 
         else:
@@ -170,7 +203,11 @@ class PageTwo(tk.Frame):
 
     def write_in(self):
         if (self.controller.shared_data["1stplace"].get() == "Write-In1"):
-            self.controller.shared_data["1stplace"].set(self.entry1.get())
+            if (self.entry1.get() == ""):
+                self.controller.popupmsg2()
+                return
+            else:
+                self.controller.shared_data["1stplace"].set(self.entry1.get())
 
     def enableEntry(self):
         self.entry1.configure(state="normal")
@@ -234,7 +271,10 @@ class PageThree(tk.Frame):
 
     def write_in(self):
         if (self.controller.shared_data["2ndplace"].get() == "Write-In2"):
-            self.controller.shared_data["2ndplace"].set(self.entry2.get())
+            if (self.entry2.get() == ""):
+                self.controller.popupmsg2()
+            else:
+                self.controller.shared_data["2ndplace"].set(self.entry2.get())
 
     def enableEntry(self):
         self.entry2.configure(state="normal")
@@ -294,7 +334,10 @@ class PageFour(tk.Frame):
 
     def write_in(self):
         if (self.controller.shared_data["3rdplace"].get() == "Write-In3"):
-            self.controller.shared_data["3rdplace"].set(self.entry3.get())
+            if (self.entry3.get() == ""):
+                self.controller.popupmsg2()
+            else:
+                self.controller.shared_data["3rdplace"].set(self.entry3.get())
         
     def enableEntry(self):
         self.entry3.configure(state="normal")
