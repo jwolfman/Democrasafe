@@ -7,6 +7,9 @@ h2,h3{
 #slides div,#report iframe,#diagram img{
     display: inline-block;
 }
-#slides,#report,#diagram,#sources{
+#slides,#report,#diagram,#sources,#sketch{
     text-align: center;
+}
+#sketch img{
+    height: 300px;
 }
