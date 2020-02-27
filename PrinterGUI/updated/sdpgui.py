@@ -48,15 +48,38 @@ class SampleApp(tk.Tk):
         # the one on the top of the stacking order
         # will be the one that is visible.
         frame.grid(row=0, column=0, sticky="nsew")
-        
         self.show_frame(page_name.__name__)  
     
     def restart_program(self):
         # Restarts the current program.
         # Note: this function does not return. Any cleanup action (like
         # saving data) must be done before calling this function."""
-        python = sys.executable
-        os.execl(python, python, * sys.argv)
+
+        # making sure all the entry are cleared and disable
+
+        self.show_frame("StartPage") 
+
+        if "PageTwo" in self.frames:
+            self.shared_data["1stplace"].set("No Vote")
+            for label in self.frames["PageTwo"].winfo_children():
+                if ( isinstance(label, tk.Entry) ):
+                    label.delete(0,tk.END)
+                    label.configure(state="disabled")
+                    label.update()
+        if "PageThree" in self.frames:
+            self.shared_data["2ndplace"].set("No Vote")
+            for label in self.frames["PageThree"].winfo_children():
+                if ( isinstance(label, tk.Entry) ):
+                    label.delete(0,tk.END)
+                    label.configure(state="disabled")
+                    label.update()
+        if "PageFour" in self.frames:
+            self.shared_data["3rdplace"].set("No Vote")
+            for label in self.frames["PageFour"].winfo_children():
+                if ( isinstance(label, tk.Entry) ):
+                    label.delete(0,tk.END)
+                    label.configure(state="disabled")
+                    label.update()
 
     def popupmsg(self):
         self.update_idletasks()
@@ -103,14 +126,14 @@ class SampleApp(tk.Tk):
         B1 = ttk.Button(popup, text="Close", command = popup.destroy)
         B1.pack()
         popup.mainloop()
-        
+
 class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="DemocraSafe", font=controller.title_font)
-        label.pack(side="top", fill="x", pady=300)
+        label.pack(side="top", fill="x", pady=0)
 
         button1 = tk.Button(self, text="Start Voting", font = controller.helv28,
                             command=lambda: controller.new_frame(PageOne))
@@ -144,11 +167,20 @@ class PageOne(tk.Frame):
         label.pack(fill="x", pady=20)
 
         button1 = tk.Button(self, text="I understood", font = controller.helv28,
-                           command=lambda: controller.new_frame(PageTwo))
+                           command=lambda: self.next())
         button2 = tk.Button(self, text="Quit", font = controller.helv28,
-                           command=lambda: controller.restart_program())
+                           command=lambda: self.restart())
         button1.place(relx = 0.25, rely = 0.75, relwidth = 0.2, relheight = 0.2)
         button2.place(relx = 0.55, rely = 0.75, relwidth = 0.2, relheight = 0.2)
+
+    def next(self):
+        if "PageTwo" in self.controller.frames:
+            self.controller.show_frame("PageTwo")
+        else:
+            self.controller.new_frame(PageTwo)    
+    
+    def restart(self):
+        self.controller.restart_program()
 
 class PageTwo(tk.Frame):
 
@@ -160,11 +192,11 @@ class PageTwo(tk.Frame):
 
         # Dictionary to create multiple buttons 
         values = {"No Vote" : "No Vote", 
-                  "Project 1" : "Dog", 
-                  "Project 2" : "Mouse", 
-                  "Project 3" : "Giraffe", 
-                  "Project 4" : "Bird"} 
-        
+                  "Project 1" : "Project 1", 
+                  "Project 2" : "Project 2", 
+                  "Project 3" : "Project 3", 
+                  "Project 4" : "Project 4"} 
+
         self.entry1 = tk.Entry(self, width = 20)
         self.entry1.place(relx = 0.53,rely = 0.616)
 
@@ -185,7 +217,7 @@ class PageTwo(tk.Frame):
         button2 = tk.Button(self, text="Next",
                            command=lambda: self.next())
         button3 = tk.Button(self, text="Discard Ballot",
-                           command=lambda: controller.restart_program())
+                           command=lambda: self.restart())
         button4 = tk.Button(self, text="More Info",
                            command=lambda: controller.popupmsg())
 
@@ -197,7 +229,7 @@ class PageTwo(tk.Frame):
     def next(self):
         self.write_in() 
         if "PageThree" in self.controller.frames:
-            self.controller.show_frame("PageThree") 
+            self.controller.show_frame("PageThree")
         else:
             self.controller.new_frame(PageThree)
 
@@ -214,8 +246,12 @@ class PageTwo(tk.Frame):
         self.entry1.update()
 
     def disableEntry(self):
+        self.entry1.delete(0,'end')
         self.entry1.configure(state="disabled")
         self.entry1.update()
+
+    def restart(self):
+        self.controller.restart_program()
 
 class PageThree(tk.Frame):
 
@@ -227,10 +263,10 @@ class PageThree(tk.Frame):
 
         # Dictionary to create multiple buttons 
         values = {"No Vote" : "No Vote", 
-                  "Project 1" : "Dog", 
-                  "Project 2" : "Mouse", 
-                  "Project 3" : "Giraffe", 
-                  "Project 4" : "Bird"} 
+                  "Project 1" : "Project 1", 
+                  "Project 2" : "Project 2", 
+                  "Project 3" : "Project 3", 
+                  "Project 4" : "Project 4"} 
 
         self.entry2 = tk.Entry(self, width = 20)
         self.entry2.place(relx = 0.53,rely = 0.616)
@@ -248,11 +284,11 @@ class PageThree(tk.Frame):
         controller.shared_data["2ndplace"].set("No Vote")
 
         button1 = tk.Button(self, text="Previous",
-                           command=lambda: controller.show_frame("PageTwo"))
+                           command=lambda: self.previous())
         button2 = tk.Button(self, text="Next",
                            command=lambda: self.next())
         button3 = tk.Button(self, text="Discard Ballot",
-                           command=lambda: controller.restart_program())
+                           command=lambda: self.restart())
         button4 = tk.Button(self, text="More Info",
                            command=lambda: controller.popupmsg())
 
@@ -260,6 +296,16 @@ class PageThree(tk.Frame):
         button2.place(relx = 0.3, rely = 0.75, relwidth = 0.2, relheight = 0.1)
         button3.place(relx = 0.7, rely = 0.75, relwidth = 0.2, relheight = 0.1)
         button4.place(relx = 0.5, rely = 0.75, relwidth = 0.2, relheight = 0.1)
+
+    def previous(self):
+        if(self.controller.shared_data["1stplace"].get() != "No Vote" and 
+           self.controller.shared_data["1stplace"].get() != "Project 1" and 
+           self.controller.shared_data["1stplace"].get() != "Project 2" and 
+           self.controller.shared_data["1stplace"].get() !="Project 3" and 
+           self.controller.shared_data["1stplace"].get() !="Project 4"):
+            self.controller.shared_data["1stplace"].set("Write-In1")  
+        
+        self.controller.show_frame("PageTwo")
 
     def next(self):
         self.write_in()  
@@ -281,8 +327,12 @@ class PageThree(tk.Frame):
         self.entry2.update()
 
     def disableEntry(self):
+        self.entry2.delete(0,'end')
         self.entry2.configure(state="disabled")
         self.entry2.update()
+
+    def restart(self):
+        self.controller.restart_program()
 
 class PageFour(tk.Frame):
 
@@ -294,10 +344,10 @@ class PageFour(tk.Frame):
 
         # Dictionary to create multiple buttons 
         values = {"No Vote" : "No Vote", 
-                  "Project 1" : "Dog", 
-                  "Project 2" : "Mouse", 
-                  "Project 3" : "Giraffe", 
-                  "Project 4" : "Bird"} 
+                  "Project 1" : "Project 1", 
+                  "Project 2" : "Project 2", 
+                  "Project 3" : "Project 3", 
+                  "Project 4" : "Project 4"} 
         
         self.entry3 = tk.Entry(self, width = 20)
         self.entry3.place(relx = 0.53,rely = 0.616)
@@ -315,11 +365,11 @@ class PageFour(tk.Frame):
         controller.shared_data["3rdplace"].set("No Vote")
 
         button1 = tk.Button(self, text="Previous",
-                           command=lambda: controller.show_frame("PageThree"))
+                           command=lambda: self.previous())
         button2 = tk.Button(self, text="Next",
                            command=lambda: self.next())
         button3 = tk.Button(self, text="Discard Ballot",
-                           command=lambda: controller.restart_program())
+                           command=lambda: self.restart())
         button4 = tk.Button(self, text="More Info",
                            command=lambda: controller.popupmsg())
 
@@ -327,6 +377,23 @@ class PageFour(tk.Frame):
         button2.place(relx = 0.3, rely = 0.75, relwidth = 0.2, relheight = 0.1)
         button3.place(relx = 0.7, rely = 0.75, relwidth = 0.2, relheight = 0.1)
         button4.place(relx = 0.5, rely = 0.75, relwidth = 0.2, relheight = 0.1)
+
+    def previous(self):
+        if(self.controller.shared_data["1stplace"].get() != "No Vote" and 
+           self.controller.shared_data["1stplace"].get() != "Project 1" and 
+           self.controller.shared_data["1stplace"].get() != "Project 2" and 
+           self.controller.shared_data["1stplace"].get() !="Project 3" and 
+           self.controller.shared_data["1stplace"].get() !="Project 4"):
+            self.controller.shared_data["1stplace"].set("Write-In1")  
+
+        if(self.controller.shared_data["2ndplace"].get() != "No Vote" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 1" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 2" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 3" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 4"):
+            self.controller.shared_data["2ndplace"].set("Write-In2")
+
+        self.controller.show_frame("PageThree")
 
     def next(self):
         self.write_in()  
@@ -344,8 +411,12 @@ class PageFour(tk.Frame):
         self.entry3.update()
 
     def disableEntry(self):
+        self.entry3.delete(0,'end')
         self.entry3.configure(state="disabled")
         self.entry3.update()
+
+    def restart(self):
+        self.controller.restart_program()
 
 class PageFive(tk.Frame):
 
@@ -377,7 +448,7 @@ class PageFive(tk.Frame):
         button4 = tk.Button(self, text="Print Ballot", font = controller.helv28,
                            command=lambda: controller.new_frame(PageSix))  
         button5 = tk.Button(self, text="Discard Ballot", font = controller.helv28,
-                           command=lambda: controller.restart_program())                 
+                           command=lambda: self.restart())                 
 
         button1.place(relx = 0.6, rely = 0.21, relwidth = 0.05, relheight = 0.05)
         button2.place(relx = 0.6, rely = 0.35, relwidth = 0.05, relheight = 0.05)
@@ -387,54 +458,57 @@ class PageFive(tk.Frame):
 
     def change1(self):
         if(self.controller.shared_data["1stplace"].get() != "No Vote" and 
-           self.controller.shared_data["1stplace"].get() != "Dog" and 
-           self.controller.shared_data["1stplace"].get() != "Mouse" and 
-           self.controller.shared_data["1stplace"].get() !="Giraffe" and 
-           self.controller.shared_data["1stplace"].get() !="Bird"):
+           self.controller.shared_data["1stplace"].get() != "Project 1" and 
+           self.controller.shared_data["1stplace"].get() != "Project 2" and 
+           self.controller.shared_data["1stplace"].get() !="Project 3" and 
+           self.controller.shared_data["1stplace"].get() !="Project 4"):
             self.controller.shared_data["1stplace"].set("Write-In1")  
 
         if(self.controller.shared_data["2ndplace"].get() != "No Vote" and 
-           self.controller.shared_data["2ndplace"].get() != "Dog" and 
-           self.controller.shared_data["2ndplace"].get() != "Mouse" and 
-           self.controller.shared_data["2ndplace"].get() != "Giraffe" and 
-           self.controller.shared_data["2ndplace"].get() != "Bird"):
+           self.controller.shared_data["2ndplace"].get() != "Project 1" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 2" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 3" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 4"):
             self.controller.shared_data["2ndplace"].set("Write-In2")
 
         if(self.controller.shared_data["3rdplace"].get() != "No Vote" and 
-           self.controller.shared_data["3rdplace"].get() != "Dog" and 
-           self.controller.shared_data["3rdplace"].get() != "Mouse" and 
-           self.controller.shared_data["3rdplace"].get() !="Giraffe" and 
-           self.controller.shared_data["3rdplace"].get() !="Bird"):
+           self.controller.shared_data["3rdplace"].get() != "Project 1" and 
+           self.controller.shared_data["3rdplace"].get() != "Project 2" and 
+           self.controller.shared_data["3rdplace"].get() !="Project 3" and 
+           self.controller.shared_data["3rdplace"].get() !="Project 4"):
             self.controller.shared_data["3rdplace"].set("Write-In3")   
 
         self.controller.show_frame("PageTwo")
 
     def change2(self):
         if(self.controller.shared_data["2ndplace"].get() != "No Vote" and 
-           self.controller.shared_data["2ndplace"].get() != "Dog" and 
-           self.controller.shared_data["2ndplace"].get() != "Mouse" and 
-           self.controller.shared_data["2ndplace"].get() != "Giraffe" and 
-           self.controller.shared_data["2ndplace"].get() != "Bird"):
+           self.controller.shared_data["2ndplace"].get() != "Project 1" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 2" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 3" and 
+           self.controller.shared_data["2ndplace"].get() != "Project 4"):
             self.controller.shared_data["2ndplace"].set("Write-In2") 
 
         if(self.controller.shared_data["3rdplace"].get() != "No Vote" and 
-           self.controller.shared_data["3rdplace"].get() != "Dog" and 
-           self.controller.shared_data["3rdplace"].get() != "Mouse" and 
-           self.controller.shared_data["3rdplace"].get() !="Giraffe" and 
-           self.controller.shared_data["3rdplace"].get() !="Bird"):
+           self.controller.shared_data["3rdplace"].get() != "Project 1" and 
+           self.controller.shared_data["3rdplace"].get() != "Project 2" and 
+           self.controller.shared_data["3rdplace"].get() !="Project 3" and 
+           self.controller.shared_data["3rdplace"].get() !="Project 4"):
             self.controller.shared_data["3rdplace"].set("Write-In3") 
 
         self.controller.show_frame("PageThree")  
 
     def change3(self):
         if(self.controller.shared_data["3rdplace"].get() != "No Vote" and 
-           self.controller.shared_data["3rdplace"].get() != "Dog" and 
-           self.controller.shared_data["3rdplace"].get() != "Mouse" and 
-           self.controller.shared_data["3rdplace"].get() !="Giraffe" and 
-           self.controller.shared_data["3rdplace"].get() !="Bird"):
+           self.controller.shared_data["3rdplace"].get() != "Project 1" and 
+           self.controller.shared_data["3rdplace"].get() != "Project 2" and 
+           self.controller.shared_data["3rdplace"].get() !="Project 3" and 
+           self.controller.shared_data["3rdplace"].get() !="Project 4"):
             self.controller.shared_data["3rdplace"].set("Write-In3")   
 
         self.controller.show_frame("PageFour")
+
+    def restart(self):
+        self.controller.restart_program()
 
 class PageSix(tk.Frame):
 
@@ -452,9 +526,12 @@ class PageSix(tk.Frame):
         label.pack(fill="x", pady=20)
 
         button2 = tk.Button(self, text="Quit", font = controller.helv28,
-                           command=lambda: controller.restart_program())
+                           command=lambda: self.restart())
 
         button2.place(relx = 0.35, rely = 0.5, relwidth = 0.3, relheight = 0.2)
+    
+    def restart(self):
+        self.controller.restart_program()
 
 def main():
     app = SampleApp()
