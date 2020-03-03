@@ -458,22 +458,40 @@ class PageFive(tk.Frame):
 
     def ballot(self):
     	self.controller.new_frame(PageSix)
+    	rows=0
     	results=[]
     	for input in [self.controller.shared_data["1stplace"].get(),self.controller.shared_data["2ndplace"].get(),self.controller.shared_data["3rdplace"].get()]:
     		output=""
     		while len(input)>32:
+    			rows++
     			lastSpace=str.rindex(input,beg=0,end=32)
     			if lastSpace!=-1&&32-lastSpace<5:
     				output+=input[0:lastSpace]+"\n"
     				input=input[lastSpace+1:len(input)]
     			else:
-    				output+=input[0:31]+"-\n"
+    				output+=input[0:31]+"-"
     				input=input[32:len(input)]
     		output+=input
     		results.append(output)
-    	os.system("echo \"1st:"+results[0]+"\"\n\" > /dev/serial0")
-    	os.system("echo \"2nd:"+results[1]+"\"\n\" > /dev/serial0")
-    	os.system("echo \"3rd:"+results[2]+"\"\n\" > /dev/serial0")
+    	#os.system("echo \"+randomID+"\"\n\" > /dev/serial0")
+    	#rows++
+    	os.system("echo \"1st:"+results[0]+"\n\" > /dev/serial0")
+    	rows+=2
+    	os.system("echo \"2nd:"+results[1]+"\n\" > /dev/serial0")
+    	rows+=2
+    	os.system("echo \"3rd:"+results[2]+"\n\" > /dev/serial0")
+    	rows+=2
+    	os.system("echo \"Thank you for voting. Hold on to"
+    		+"this reciept and insert it to\n"
+    		+"the scanning unit to cast your\n"
+    		+"Vote. Thank you for voting.\n\" > /dev/serial0")
+    	rows+=5
+    	os.system("echo \"This system has been brought to\n"
+    		+"you by Team 26: DemocraSafe.\" > /dev/serial0")
+    	rows+=2
+    	while rows<22:
+    		os.system("echo \"\" > /dev/serial0")
+    		rows++
 
     def change1(self):
         if(self.controller.shared_data["1stplace"].get() != "No Vote" and 
