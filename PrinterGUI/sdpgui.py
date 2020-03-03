@@ -446,7 +446,7 @@ class PageFive(tk.Frame):
         label.pack(fill="x", pady=20)
 
         button4 = tk.Button(self, text="Print Ballot", font = controller.helv28,
-                           command=lambda: controller.new_frame(PageSix))  
+                           command=lambda: self.ballot())  
         button5 = tk.Button(self, text="Discard Ballot", font = controller.helv28,
                            command=lambda: self.restart())                 
 
@@ -455,6 +455,25 @@ class PageFive(tk.Frame):
         button3.place(relx = 0.6, rely = 0.5, relwidth = 0.05, relheight = 0.05)
         button4.place(relx = 0.1, rely = 0.7, relwidth = 0.3, relheight = 0.2)
         button5.place(relx = 0.6, rely = 0.7, relwidth = 0.3, relheight = 0.2)
+
+    def ballot(self):
+    	self.controller.new_frame(PageSix)
+    	results=[]
+    	for input in [self.controller.shared_data["1stplace"].get(),self.controller.shared_data["2ndplace"].get(),self.controller.shared_data["3rdplace"].get()]:
+    		output=""
+    		while len(input)>32:
+    			lastSpace=str.rindex(input,beg=0,end=32)
+    			if lastSpace!=-1&&32-lastSpace<5:
+    				output+=input[0:lastSpace]+"\n"
+    				input=input[lastSpace+1:len(input)]
+    			else:
+    				output+=input[0:31]+"-\n"
+    				input=input[32:len(input)]
+    		output+=input
+    		results.append(output)
+    	os.system("echo \"1st:"+results[0]+"\"\n\" > /dev/serial0")
+    	os.system("echo \"2nd:"+results[1]+"\"\n\" > /dev/serial0")
+    	os.system("echo \"3rd:"+results[2]+"\"\n\" > /dev/serial0")
 
     def change1(self):
         if(self.controller.shared_data["1stplace"].get() != "No Vote" and 
@@ -543,4 +562,5 @@ def main():
     app.mainloop()
 
 if __name__ == "__main__":
+	os.system('stty -F /dev/serial0 19200')
     main()
