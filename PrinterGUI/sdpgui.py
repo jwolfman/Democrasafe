@@ -490,7 +490,7 @@ class PageFive(tk.Frame):
     	os.system("echo \"This system has been brought to\n"
     		+"you by Team 26: DemocraSafe.\" > /dev/serial0")
     	rows+=2
-    	while rows<22:
+    	while rows<28:
     		os.system("echo \"\" > /dev/serial0")
     		rows = rows + 1
 
