@@ -491,7 +491,7 @@ class PageFive(tk.Frame):
     	rows+=2
     	while rows<22:
     		os.system("echo \"\" > /dev/serial0")
-    		rows++
+    		rows = rows + 1
 
     def change1(self):
         if(self.controller.shared_data["1stplace"].get() != "No Vote" and 
