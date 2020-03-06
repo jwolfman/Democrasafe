@@ -463,7 +463,7 @@ class PageFive(tk.Frame):
     	for input in [self.controller.shared_data["1stplace"].get(),self.controller.shared_data["2ndplace"].get(),self.controller.shared_data["3rdplace"].get()]:
     		output=""
     		while len(input)>32:
-    			rows++
+    			rows = rows + 1
     			lastSpace=str.rindex(input,beg=0,end=32)
     			if lastSpace!=-1&&32-lastSpace<5:
     				output+=input[0:lastSpace]+"\n"
