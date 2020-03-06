@@ -580,5 +580,5 @@ def main():
     app.mainloop()
 
 if __name__ == "__main__":
-	os.system('stty -F /dev/serial0 19200')
+    os.system('stty -F /dev/serial0 19200')
     main()
