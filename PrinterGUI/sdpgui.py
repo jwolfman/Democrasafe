@@ -9,11 +9,11 @@ class SampleApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
-        self.helv28 = tkfont.Font(family = 'Helvetica', size = 20) 
-        self.title_font = tkfont.Font(family='Helvetica', size=40, weight="bold", slant="italic") 
-        self.header_font = tkfont.Font(family='Helvetica', size=36, weight="bold") 
-        self.helv28b = tkfont.Font(family = 'Helvetica', size = 20, weight = "bold") 
-        self.helv28i = tkfont.Font(family = 'Helvetica', size = 20, slant = "italic")
+        self.helv28 = tkfont.Font(family = 'Helvetica', size = 15) 
+        self.title_font = tkfont.Font(family='Helvetica', size=30, weight="bold", slant="italic") 
+        self.header_font = tkfont.Font(family='Helvetica', size=30, weight="bold") 
+        self.helv28b = tkfont.Font(family = 'Helvetica', size = 15, weight = "bold") 
+        self.helv28i = tkfont.Font(family = 'Helvetica', size = 13, slant = "italic")
 
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
@@ -149,22 +149,22 @@ class PageOne(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="Voting Instructions", font=controller.title_font)
-        label.pack(side="top", fill="x", pady=50)
+        label.pack(side="top", fill="x", pady=20)
 
         label = tk.Label(self, text="1. Read the questions carefully before casting your vote.", font=controller.helv28i)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady = 5)
         label = tk.Label(self, text="2. After you make your choice, proceed by clicking 'Next'.", font=controller.helv28i)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady = 5)
         label = tk.Label(self, text="3. Click on 'More Info' for the summary of the projects.", font=controller.helv28i)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady = 5)
         label = tk.Label(self, text="4. You can discard your ballot anytime during this process by clicking 'Discard Ballot'.", font=controller.helv28i)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady = 5)
         label = tk.Label(self, text="5. Review your choices in the Summary page before you 'Print Ballot'.", font=controller.helv28i)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady = 5)
         label = tk.Label(self, text="6. Wait for the ballot to print and insert it into the scanner to cast your vote.", font=controller.helv28i)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady = 5)
         label = tk.Label(self, text=" -- Please do not leave your machine unattended --", font=controller.helv28b)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady = 5)
 
         button1 = tk.Button(self, text="I understood", font = controller.helv28,
                            command=lambda: self.next())
@@ -206,9 +206,9 @@ class PageTwo(tk.Frame):
         # rather than creating each button separately 
         for (text, value) in values.items(): 
             tk.Radiobutton(self, text = text, variable = controller.shared_data["1stplace"], 
-                        value = value, command=self.disableEntry).pack(side = 'top', ipady = 35)
+                        value = value, command=self.disableEntry).pack(side = 'top', ipady = 10)
         tk.Radiobutton(self, text = "Other: ", variable = controller.shared_data["1stplace"],
-                       value = "Write-In1", command=self.enableEntry).pack(side = 'top', ipady = 30)
+                       value = "Write-In1", command=self.enableEntry).pack(side = 'top', ipady = 10)
 
         controller.shared_data["1stplace"].set("No Vote")
 
@@ -277,9 +277,9 @@ class PageThree(tk.Frame):
         # rather than creating each button separately 
         for (text, value) in values.items(): 
             tk.Radiobutton(self, text = text, variable = controller.shared_data["2ndplace"], 
-                        value = value, command=self.disableEntry).pack(side = 'top', ipady = 35) 
+                        value = value, command=self.disableEntry).pack(side = 'top', ipady = 10) 
         tk.Radiobutton(self, text = "Other: ", variable = controller.shared_data["2ndplace"],
-                    value = "Write-In2", command=self.enableEntry).pack(side = 'top', ipady = 30)
+                    value = "Write-In2", command=self.enableEntry).pack(side = 'top', ipady = 10)
 
         controller.shared_data["2ndplace"].set("No Vote")
 
@@ -358,9 +358,9 @@ class PageFour(tk.Frame):
         # rather than creating each button separately 
         for (text, value) in values.items(): 
             tk.Radiobutton(self, text = text, variable = controller.shared_data["3rdplace"], 
-                        value = value, command=self.disableEntry).pack(side = 'top', ipady = 35) 
+                        value = value, command=self.disableEntry).pack(side = 'top', ipady = 10) 
         tk.Radiobutton(self, text = "Other: ", variable = controller.shared_data["3rdplace"],
-                    value = "Write-In3", command=self.enableEntry).pack(side = 'top', ipady = 30)
+                    value = "Write-In3", command=self.enableEntry).pack(side = 'top', ipady = 10)
 
         controller.shared_data["3rdplace"].set("No Vote")
 
@@ -424,22 +424,22 @@ class PageFive(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="Ballot Summary", font=controller.header_font)
-        label.pack(side="top", fill="x", pady=50)
+        label.pack(side="top", fill="x", pady=20)
 
         label = tk.Label(self, text="1st Place: " + controller.shared_data["1stplace"].get(), font=controller.helv28b)
-        label.pack(fill="x", pady=50)
+        label.pack(fill="x", pady=16)
 
         label = tk.Label(self, text="2nd Place: " + controller.shared_data["2ndplace"].get(), font=controller.helv28b)        
-        label.pack(fill="x", pady=50)
+        label.pack(fill="x", pady=23)
 
         label = tk.Label(self, text="3rd Place: " + controller.shared_data["3rdplace"].get(), font=controller.helv28b)
-        label.pack(fill="x", pady=50)
+        label.pack(fill="x", pady=15)
 
-        button1 = tk.Button(self, text="Change", font = 15,
+        button1 = tk.Button(self, text="Change", font = 10,
                            command=lambda: self.change1())
-        button2 = tk.Button(self, text="Change", font = 15,
+        button2 = tk.Button(self, text="Change", font = 10,
                            command=lambda: self.change2())
-        button3 = tk.Button(self, text="Change", font = 15,
+        button3 = tk.Button(self, text="Change", font = 10,
                            command=lambda: self.change3())
 
         label = tk.Label(self, text="-- Please review your votes above carefully as you cannot go back once you click 'Print Ballot' --", font=controller.helv28i)                
@@ -450,14 +450,15 @@ class PageFive(tk.Frame):
         button5 = tk.Button(self, text="Discard Ballot", font = controller.helv28,
                            command=lambda: self.restart())                 
 
-        button1.place(relx = 0.6, rely = 0.21, relwidth = 0.05, relheight = 0.05)
-        button2.place(relx = 0.6, rely = 0.35, relwidth = 0.05, relheight = 0.05)
-        button3.place(relx = 0.6, rely = 0.5, relwidth = 0.05, relheight = 0.05)
+        button1.place(relx = 0.65, rely = 0.21, relwidth = 0.1, relheight = 0.05)
+        button2.place(relx = 0.65, rely = 0.35, relwidth = 0.1, relheight = 0.05)
+        button3.place(relx = 0.65, rely = 0.5, relwidth = 0.1, relheight = 0.05)
         button4.place(relx = 0.1, rely = 0.7, relwidth = 0.3, relheight = 0.2)
         button5.place(relx = 0.6, rely = 0.7, relwidth = 0.3, relheight = 0.2)
 
     def ballot(self):
     	self.controller.new_frame(PageSix)
+    	
     	rows=0
     	results=[]
     	for input in [self.controller.shared_data["1stplace"].get(),self.controller.shared_data["2ndplace"].get(),self.controller.shared_data["3rdplace"].get()]:
@@ -553,19 +554,19 @@ class PageSix(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="- Ballot Printing -", font=controller.title_font)
-        label.pack(side="top", fill="x", pady=50)
+        label.pack(side="top", fill="x", pady=20)
 
         label = tk.Label(self, text="Thank you for choosing DemocraSafe!", font=controller.title_font)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady=10)
         label = tk.Label(self, text="Please do not forget to take your ballot below and insert it into the scanner.", font=controller.helv28i)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady=10)
         label = tk.Label(self, text="Happy Voting!", font=controller.helv28b)
-        label.pack(fill="x", pady=20)
+        label.pack(fill="x", pady=10)
 
         button2 = tk.Button(self, text="Quit", font = controller.helv28,
                            command=lambda: self.restart())
 
-        button2.place(relx = 0.35, rely = 0.5, relwidth = 0.3, relheight = 0.2)
+        button2.place(relx = 0.35, rely = 0.6, relwidth = 0.3, relheight = 0.2)
     
     def restart(self):
         self.controller.restart_program()
