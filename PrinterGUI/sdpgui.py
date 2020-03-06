@@ -465,7 +465,7 @@ class PageFive(tk.Frame):
     		while len(input)>32:
     			rows = rows + 1
     			lastSpace=str.rindex(input,beg=0,end=32)
-    			if lastSpace!=-1&&32-lastSpace<5:
+    			if lastSpace!=-1 and 32-lastSpace<5:
     				output+=input[0:lastSpace]+"\n"
     				input=input[lastSpace+1:len(input)]
     			else:
