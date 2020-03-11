@@ -166,7 +166,7 @@ class PageOne(tk.Frame):
         label = tk.Label(self, text=" -- Please do not leave your machine unattended --", font=controller.helv28b)
         label.pack(fill="x", pady = 5)
 
-        button1 = tk.Button(self, text="I understood", font = controller.helv28,
+        button1 = tk.Button(self, text="I understand", font = controller.helv28,
                            command=lambda: self.next())
         button2 = tk.Button(self, text="Quit", font = controller.helv28,
                            command=lambda: self.restart())

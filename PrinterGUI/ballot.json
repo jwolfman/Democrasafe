@@ -1,0 +1,63 @@
+{
+    "QUESTIONNAIRE_LENGTH": 3,
+
+    "1":{
+        "QUESTION": "Which project was your favorite?",
+        "OPTIONS": [
+            "Project 1: Radius", "Project 2: H2LO", "Project 3: Weatherbox",
+            "Project 4: SEER OPTICS", "Project 5: Acoustic Battleship",
+            "Project 6: CORDIC Resolve", "Project 7: Tetra Board", "Project 8: osPhone",
+            "Project 9: CLOVER", "Project 10: Study Spot Detector", "Project 11: NETRA",
+            "Project 12: Poor to Proper Posture", "Project 13: SMART Rack",
+            "Project 14: Automated Mail Sorter", "Project 15: Camera Trap",
+            "Project 16: Smart Coaster", "Project 17: IKU ECU",
+            "Project 18: Attendence Plus+", "Project 19: Water Wizard",
+            "Project 20: I.G.O.R.", "Project 21: Bop Bot", "Project 22: Mappa Signa",
+            "Project 23: SPI", "Project 24: Follow Me", "Project 25: Growing Green",
+            "Project 26: Democrasafe", "Project 27: S.T.R.I.K.E."
+        ],
+        "ENABLE_WRITE_IN": false,
+        "DISABLE_REPEAT": true,
+        "PRINT_SUMMARY": "1st"
+    },
+
+    "2":{
+        "QUESTION": "Which project was your second favorite?",
+        "OPTIONS": [
+            "Project 1: Radius", "Project 2: H2LO", "Project 3: Weatherbox",
+            "Project 4: SEER OPTICS", "Project 5: Acoustic Battleship",
+            "Project 6: CORDIC Resolve", "Project 7: Tetra Board", "Project 8: osPhone",
+            "Project 9: CLOVER", "Project 10: Study Spot Detector", "Project 11: NETRA",
+            "Project 12: Poor to Proper Posture", "Project 13: SMART Rack",
+            "Project 14: Automated Mail Sorter", "Project 15: Camera Trap",
+            "Project 16: Smart Coaster", "Project 17: IKU ECU",
+            "Project 18: Attendence Plus+", "Project 19: Water Wizard",
+            "Project 20: I.G.O.R.", "Project 21: Bop Bot", "Project 22: Mappa Signa",
+            "Project 23: SPI", "Project 24: Follow Me", "Project 25: Growing Green",
+            "Project 26: Democrasafe", "Project 27: S.T.R.I.K.E."
+        ],
+        "ENABLE_WRITE_IN": false,
+        "DISABLE_REPEAT": true,
+        "PRINT_SUMMARY": "2nd"
+    },
+
+    "3":{
+        "QUESTION": "Which project was your third favorite?",
+        "OPTIONS": [
+            "Project 1: Radius", "Project 2: H2LO", "Project 3: Weatherbox",
+            "Project 4: SEER OPTICS", "Project 5: Acoustic Battleship",
+            "Project 6: CORDIC Resolve", "Project 7: Tetra Board", "Project 8: osPhone",
+            "Project 9: CLOVER", "Project 10: Study Spot Detector", "Project 11: NETRA",
+            "Project 12: Poor to Proper Posture", "Project 13: SMART Rack",
+            "Project 14: Automated Mail Sorter", "Project 15: Camera Trap",
+            "Project 16: Smart Coaster", "Project 17: IKU ECU",
+            "Project 18: Attendence Plus+", "Project 19: Water Wizard",
+            "Project 20: I.G.O.R.", "Project 21: Bop Bot", "Project 22: Mappa Signa",
+            "Project 23: SPI", "Project 24: Follow Me", "Project 25: Growing Green",
+            "Project 26: Democrasafe", "Project 27: S.T.R.I.K.E."
+        ],
+        "ENABLE_WRITE_IN": false,
+        "DISABLE_REPEAT": true,
+        "PRINT_SUMMARY": "3rd"
+    }
+}
