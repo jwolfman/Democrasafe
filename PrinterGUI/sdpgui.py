@@ -1,5 +1,6 @@
 import sys
 import os
+import random
 import tkinter as tk                
 from tkinter import font  as tkfont 
 from tkinter import ttk
@@ -456,11 +457,23 @@ class PageFive(tk.Frame):
         button4.place(relx = 0.1, rely = 0.7, relwidth = 0.3, relheight = 0.2)
         button5.place(relx = 0.6, rely = 0.7, relwidth = 0.3, relheight = 0.2)
 
+    def getID(self):
+    	out=""
+    	options="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTTUVWXYZ"
+    	out+=options[random.randint(0,62)]
+    	out+=options[random.randint(0,62)]
+    	out+=options[random.randint(0,62)]
+    	out+=options[random.randint(0,62)]
+    	out+=options[random.randint(0,62)]
+    	out+=options[random.randint(0,62)]
+    	return out
+
     def ballot(self):
     	self.controller.new_frame(PageSix)
     	
     	rows=0
     	results=[]
+    	random=getID()
     	for input in [self.controller.shared_data["1stplace"].get(),self.controller.shared_data["2ndplace"].get(),self.controller.shared_data["3rdplace"].get()]:
     		output=""
     		while len(input)>32:
@@ -474,8 +487,8 @@ class PageFive(tk.Frame):
     				input=input[32:len(input)]
     		output+=input
     		results.append(output)
-    	#os.system("echo \"+randomID+"\"\n\" > /dev/serial0")
-    	#rows++
+    	os.system("echo \""+chr(0xDB)+(" "*12)+randomID+(" "*12)+chr(0xDB)+"\"\n\" > /dev/serial0")
+    	rows+=1
     	os.system("echo \"1st:"+results[0]+"\n\" > /dev/serial0")
     	rows+=2
     	os.system("echo \"2nd:"+results[1]+"\n\" > /dev/serial0")
@@ -490,7 +503,9 @@ class PageFive(tk.Frame):
     	os.system("echo \"This system has been brought to\n"
     		+"you by Team 26: DemocraSafe.\" > /dev/serial0")
     	rows+=2
-    	while rows<28:
+    	os.system("echo \""+chr(0xDB)+(" "*12)+randomID+(" "*12)+chr(0xDB)+"\"\n\" > /dev/serial0")
+    	rows+=1
+    	while rows<28:#about 10.5CM
     		os.system("echo \"\" > /dev/serial0")
     		rows = rows + 1
 
