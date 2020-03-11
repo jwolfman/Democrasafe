@@ -484,7 +484,7 @@ class PageFive(tk.Frame):
     					output+=input[0:32]+"\n"
 	    				input=input[33:len(input)]
 	    			else:
-		   				output+=input[0:lastSpace]+"\n"
+		   			output+=input[0:lastSpace]+"\n"
     					input=input[lastSpace+1:len(input)]
     			else:
     				output+=input[0:31]+"-"
