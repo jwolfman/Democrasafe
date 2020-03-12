@@ -580,9 +580,9 @@ class PageFive(tk.Frame):
         rows = 0
         results = []
         random = getID()
-        for input in [self.controller.shared_data['1stplace'].get(),
-                      self.controller.shared_data['2ndplace'].get(),
-                      self.controller.shared_data['3rdplace'].get()]:
+        for input in ["1st: "+self.controller.shared_data['1stplace'].get(),
+                      "2nd: "+self.controller.shared_data['2ndplace'].get(),
+                      "3rd: "+self.controller.shared_data['3rdplace'].get()]:
             output = ''
             while len(input) > 32:
                 rows = rows + 1
@@ -605,13 +605,13 @@ class PageFive(tk.Frame):
                   + chr(0x7F) + "\n\" > /dev/serial0")
         rows += 1
 
-        os.system("echo \"1st:" + results[0] + "\n\" > /dev/serial0")
+        os.system("echo \"" + results[0] + "\n\" > /dev/serial0")
         rows += 2
 
-        os.system("echo \"2nd:" + results[1] + "\n\" > /dev/serial0")
+        os.system("echo \"" + results[1] + "\n\" > /dev/serial0")
         rows += 2
 
-        os.system("echo \"3rd:" + results[2] + "\n\" > /dev/serial0")
+        os.system("echo \"" + results[2] + "\n\" > /dev/serial0")
         rows += 2
 
         os.system("echo \"" + chr(0x7F) + (" " * 12) + randomID + (" " * 12)
