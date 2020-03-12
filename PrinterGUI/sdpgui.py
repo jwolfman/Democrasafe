@@ -601,27 +601,27 @@ class PageFive(tk.Frame):
             output += input
             results.append(output)
 
-        os.system('echo \"' + chr(0xDB) + ' ' * 12 + randomID + ' ' * 12
-                  + chr(0xDB) + '\"\n" > /dev/serial0')
+        os.system("echo \"" + chr(0xDB) + (" " * 12) + randomID + (" " * 12)
+                  + chr(0xDB) + "\n\" > /dev/serial0")
         rows += 1
 
-        os.system('echo "1st:' + results[0] + '\n" > /dev/serial0')
+        os.system("echo \"1st:" + results[0] + "\n\" > /dev/serial0")
         rows += 2
 
-        os.system('echo "2nd:' + results[1] + '\n" > /dev/serial0')
+        os.system("echo \"2nd:" + results[1] + "\n\" > /dev/serial0")
         rows += 2
 
-        os.system('echo "3rd:' + results[2] + '\n" > /dev/serial0')
+        os.system("echo \"3rd:" + results[2] + "\n\" > /dev/serial0")
         rows += 2
 
-        os.system('echo \"' + chr(0xDB) + ' ' * 12 + randomID + ' ' * 12
-                  + chr(0xDB) + '\"\n" > /dev/serial0')
+        os.system("echo \"" + chr(0xDB) + (" " * 12) + randomID + (" " * 12)
+                  + chr(0xDB) + "\n\" > /dev/serial0")
         rows += 1
 
-        os.system('echo "Thank you for voting. Hold on to'
+        os.system('echo \"Thank you for voting. Hold on to'
                   + 'this reciept and insert it to\n'
                   + 'the scanning unit to cast your\n'
-                  + 'Vote. Thank you for voting.\n" > /dev/serial0')
+                  + 'Vote. Thank you for voting.\n\" > /dev/serial0')
         rows += 5
         os.system('echo "This system has been brought to\n'
                   + 'you by Team 26: DemocraSafe." > /dev/serial0')
