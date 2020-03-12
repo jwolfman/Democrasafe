@@ -601,8 +601,8 @@ class PageFive(tk.Frame):
             output += input
             results.append(output)
 
-        os.system("echo \"" + chr(0xF) + (" " * 12) + randomID + (" " * 12)
-                  + chr(0xD) + "\n\" > /dev/serial0")
+        os.system("echo \"" + chr(0x24) + (" " * 12) + randomID + (" " * 12)
+                  + chr(0x53) + "\n\" > /dev/serial0")
         rows += 1
 
         os.system("echo \"1st:" + results[0] + "\n\" > /dev/serial0")
@@ -614,8 +614,8 @@ class PageFive(tk.Frame):
         os.system("echo \"3rd:" + results[2] + "\n\" > /dev/serial0")
         rows += 2
 
-        os.system("echo \"" + chr(0xB) + (" " * 12) + randomID + (" " * 12)
-                  + chr(0x8) + "\n\" > /dev/serial0")
+        os.system("echo \"" + chr(0xB2) + (" " * 12) + randomID + (" " * 12)
+                  + chr(0x80) + "\n\" > /dev/serial0")
         rows += 1
 
         os.system('echo \"Thank you for voting. Hold on to'
