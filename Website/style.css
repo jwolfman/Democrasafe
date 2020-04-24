@@ -4,10 +4,10 @@
 h2,h3{
     text-align: center;
 }
-#slides div,#report iframe,#diagram img{
+#slides div,#report iframe,#diagram img,#poster iframe{
     display: inline-block;
 }
-#slides,#report,#diagram,#sources,#sketch{
+#slides,#report,#diagram,#sources,#sketch,#poster{
     text-align: center;
 }
 #sketch img{
